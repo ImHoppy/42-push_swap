@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 15:59:45 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/18 11:41:25 by mbraets          ###   ########.fr       */
+/*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
+/*   Updated: 2022/01/18 15:23:35 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-/**
- * Alloue (avec malloc(3)) et renvoie un nouvel
- * élément. la variable content est initialisée à
- * l’aide de la valeur du paramètre content. La
- * variable ’next’ est initialisée à NULL.
- * @param content Le contenu du nouvel élément.
- * @return Le nouvel element
- */
-t_list	*ft_lstnew(void *content)
+t_stack	*ft_stacknew(void *content)
 {
-	t_list	*new;
+	t_stack	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
 	new->content = content;
 	new->next = NULL;
 	return (new);
 }
+
+void	ft_stackadd_front(t_stack **alst, t_stack *new)
+{
+	if (alst == NULL || new == NULL)
+		return ;
+	new->next = *alst;
+	*alst = new;
+}
+

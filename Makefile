@@ -17,7 +17,7 @@ OBJ		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 
 $(EXEC): $(OBJ)
-	@make -C $(LIBFT)
+	@make -C $(LIBFT) bonus
 	$(CC) $(OBJ) $(LFLAGS) -L$(LIBFT) -lft -o $@
 	@echo "\x1b[32mCompiled "$@" successfully! \x1b[0m"
 #	$(CC) -o $@ $^ $(LDFLAGS)

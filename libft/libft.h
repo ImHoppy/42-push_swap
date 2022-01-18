@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:49:41 by mbraets           #+#    #+#             */
-/*   Updated: 2021/12/01 12:31:32 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/18 14:42:58 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_putnbr_fd(int n, int fd);
 
 // List
 // Malloc
+
 t_list	*ft_lstnew(void *content);
 
 void	ft_lstadd_front(t_list **alst, t_list *new);
@@ -70,9 +71,11 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 // Free
+
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 // Malloc and Frees
+
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif
