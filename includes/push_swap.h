@@ -14,9 +14,13 @@ typedef struct		s_stacks
 {
 	t_stack			*a;
 	t_stack			*b;
+	char			*result;
 }					t_stacks;
 
 t_stack	*ft_stacknew(int content);
 void	ft_stackadd_front(t_stack **alst, t_stack *new);
+void	ft_stackclear(t_stack **lst);
+int	ft_stacklenght(t_stack *lst);
+
 
 #endif
