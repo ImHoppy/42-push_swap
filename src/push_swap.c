@@ -6,9 +6,14 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/20 06:20:09 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/20 06:46:41 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/** 
+ * TODO:
+ *  - Check MAX and MIN int 2147483647, -2147483648
+ */
 
 #include "push_swap.h"
 #include <stdio.h>
@@ -20,7 +25,9 @@ int	ft_strisdigit(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!(ft_isdigit(s[i])))
+		if (i == 0 && s[i] == '-')
+			i++;
+		else if (!(ft_isdigit(s[i])))
 			return (0);
 		i++;
 	}
@@ -63,7 +70,7 @@ int	main(int argc, char **argv)
 		return (0);
 	i = 0;
 	while (argv[++i])
-		if (!(ft_strisdigit(argv[i])))
+		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			return (ft_putstr_fd("Error\n", 1), 0);
 	stackA = check_arg(argc - 1, argv + 1);
 	head = stackA;
