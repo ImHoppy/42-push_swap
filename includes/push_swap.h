@@ -16,7 +16,7 @@ typedef struct		s_stacks
 	t_stack			*b;
 }					t_stacks;
 
-t_stack	*ft_stacknew(void *content);
+t_stack	*ft_stacknew(int content);
 void	ft_stackadd_front(t_stack **alst, t_stack *new);
 
 #endif
