@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/20 06:11:23 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/24 03:55:54 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_stacklenght(t_stack *lst)
 	lst = lst->next;
 	if (lst != NULL)
 		len += ft_stacklenght(lst);
-	// len++;
 	return (len);
 }
 
@@ -63,4 +62,21 @@ void	ft_stackclear(t_stack **lst)
 		list = old;
 	}
 	*lst = 0;
+}
+
+t_stack *stack_pop(t_stack **stack)
+{
+	t_stack	*popped;
+	
+	popped = *stack;
+	(*stack) = (*stack)->next;
+	return (popped);
+}
+
+void stack_push(t_stack **stack, t_stack *new)
+{
+	if (stack == NULL || new == NULL)
+		return ;
+	new->next = *stack;
+	*stack = new;
 }

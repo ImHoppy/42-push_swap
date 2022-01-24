@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/20 06:46:41 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/24 04:01:30 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,10 @@ int	ft_strisdigit(char *s)
 t_stack	*check_arg(int argc, char **argv)
 {
 	int		i;
-	int		*res;
 	t_stack	*start;
 
 	start = NULL;
 	i = 0;
-	res = malloc(sizeof(int) * (argc));
-	if (!res)
-		return (NULL);
 	while (i < argc)
 	{
 		if (ft_strisdigit(argv[i]))
@@ -63,7 +59,7 @@ int	main(int argc, char **argv)
 {
 	// t_list	*start = NULL;
 	t_stack	*stackA;
-	t_stack	*head;
+	
 	int		i;
 
 	if (argc < 2)
@@ -73,16 +69,24 @@ int	main(int argc, char **argv)
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			return (ft_putstr_fd("Error\n", 1), 0);
 	stackA = check_arg(argc - 1, argv + 1);
-	head = stackA;
 	if (stackA != NULL)
 	{
 		printf("%d\n", ft_stacklenght(stackA));
 		// ft_lstadd_front(&start, ft_lstnew((void*)&tab[0]));
 		// ft_lstadd_front(&start, ft_lstnew((void*)&tab[1]));
-		for (int i = 0; i < argc - 1; i++)
-		{
-			printf("%d\n", (int)head->content);
-			head = head->next;
+		// for (int i = 0; i < argc - 1; i++)
+		// {
+		// 	printf("%d\n", (int)head->content);
+		// 	head = head->next;
+		// }
+		for (t_stack *head = stackA; head != NULL; head = head->next) {
+			printf("%d ", head->content);
+		}
+		// printf(":%d\n", stack_pop(&stackA)->content);
+		printf("\n");
+		swap_a(&stackA);
+		for (t_stack *head = stackA; head != NULL; head = head->next) {
+			printf("%d ", head->content);
 		}
 		ft_stackclear(&stackA);
 	}
@@ -90,3 +94,36 @@ int	main(int argc, char **argv)
 		// ;;
 	return (0);
 }
+
+// #include <stdlib.h>
+// #include <stdio.h>
+
+// typedef struct nodeStruct
+// {
+//     int val;
+//     struct nodeStruct *next;
+// } node;
+
+// static void push(node **head, int v)
+// {
+//     node *temp = malloc(sizeof(node));
+//     temp->val = v;
+//     temp->next = *head;
+//     *head = temp;
+// }
+
+// int main(int argc, char **argv)
+// {
+//     (void) argv;
+//     (void) argc;
+//     node *list = NULL;
+
+//     for (int i=0; i<10; ++i) {
+//         push(&list, i);
+//     }
+//     for(node *l = list; l != NULL; l = l->next) {
+//         printf("%d ", l->val);
+//     }
+//     printf("\n");
+//     return 0;
+// }
