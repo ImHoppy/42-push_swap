@@ -73,6 +73,22 @@ t_stack	*ft_stacklast(t_stack *lst)
 	return (lst);
 }
 
+t_stack	*ft_stacklastoflast(t_stack *lst)
+
+{
+
+	if (lst == NULL)
+
+		return (NULL);
+
+	while (lst->next != NULL && lst->next->next != NULL)
+
+		lst = lst->next;
+
+	return (lst);
+
+}
+
 t_stack *stack_pop(t_stack **stack)
 {
 	t_stack	*popped;
