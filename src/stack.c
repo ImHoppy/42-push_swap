@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/24 03:55:54 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:04:13 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ void	ft_stackclear(t_stack **lst)
 	*lst = 0;
 }
 
+t_stack	*ft_stacklast(t_stack *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
+
 t_stack *stack_pop(t_stack **stack)
 {
 	t_stack	*popped;
@@ -75,8 +84,13 @@ t_stack *stack_pop(t_stack **stack)
 
 void stack_push(t_stack **stack, t_stack *new)
 {
-	if (stack == NULL || new == NULL)
+	if (new == NULL)
 		return ;
-	new->next = *stack;
-	*stack = new;
+	if (stack == NULL)
+		*stack = new;
+	else
+	{
+		new->next = *stack;
+		*stack = new;
+	}
 }
