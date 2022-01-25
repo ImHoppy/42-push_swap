@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/24 17:25:44 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/25 12:22:02 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ int	main(int argc, char **argv)
 		push_b(stacks);
 
 		print_stack(stacks);
-		push_a(stacks);
+		// push_a(stacks);
+		// push_a(stacks);
+		rotate_a(stacks);
+		rotate_b(stacks);
 
 		print_stack(stacks);
 
