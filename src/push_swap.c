@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 12:22:02 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:07:04 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ void	ft_putendl(void *s)
 	}
 }
 
-
-void print_stack(t_stacks *stacks)
+void	print_stack(t_stacks *stacks)
 {
 	// t_stack *head_a = stacks->a;
 	// t_stack *head_b = stacks->b;
-
 	// while (head_a != NULL && head_b != NULL)
 	// {
 	// 	if (head_a->next != NULL)
@@ -77,9 +75,9 @@ void print_stack(t_stacks *stacks)
 	// 	if (head_b->next != NULL)
 	// 		head_b = head_b->next;
 	// 	printf("%5d %d\n", head_a->content, head_b->content);
-
 	// }
 	printf("\n----------\n");
+	// (void)stacks;
 	printf("StackA:%6s", "");
 	for (t_stack *head = stacks->a; head != NULL; head = head->next) {
 		printf("%d ", head->content);
@@ -92,11 +90,8 @@ void print_stack(t_stacks *stacks)
 
 int	main(int argc, char **argv)
 {
-	// t_list	*start = NULL;
-	// t_stack		*stackA;
 	t_stacks	*stacks;
-
-	int		i;
+	int			i;
 
 	if (argc < 2)
 		return (0);
@@ -105,9 +100,9 @@ int	main(int argc, char **argv)
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			return (ft_putstr_fd("Error\n", 1), 0);
 	stacks = malloc(sizeof(t_stacks));
+	stacks->result = NULL;
 	stacks->a = check_arg(argc - 1, argv + 1);
 	stacks->b = NULL;
-	// stacks->a = &stackA;
 	if (stacks->a != NULL)
 	{
 		printf("lenght:{%d}\n", ft_stacklenght(stacks->a));
@@ -121,27 +116,27 @@ int	main(int argc, char **argv)
 		push_b(stacks);
 		print_stack(stacks);
 		push_b(stacks);
-
+		push_b(stacks);
 		print_stack(stacks);
-		// push_a(stacks);
-		// push_a(stacks);
+		push_a(stacks);
+		push_a(stacks);
 		rotate_a(stacks);
 		rotate_b(stacks);
-
 		print_stack(stacks);
-
+		reverse_rotate_a(stacks);
+		reverse_rotate_b(stacks);
+		print_stack(stacks);
 		printf("\n");
 		ft_stackclear(&stacks->a);
+		ft_stackclear(&stacks->b);
 		ft_lstclear(&stacks->result, &ft_putendl);
+		free(stacks->result);
 		free(stacks);
 	}
 	// while (1)
 		// ;;
 	return (0);
 }
-
-	
-
 
 // #include <stdlib.h>
 // #include <stdio.h>
