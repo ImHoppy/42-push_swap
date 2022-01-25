@@ -6,15 +6,15 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 15:07:04 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/25 17:29:32 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /** 
  * TODO:
  *  - Check MAX and MIN int 2147483647, -2147483648
- *  - Add prev to struct stack maybe? 
- *  - finish operations.c
+ * 	- Remove gitignore
+ *  - 
  */
 
 #include "push_swap.h"
@@ -27,7 +27,7 @@ int	ft_strisdigit(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (i == 0 && s[i] == '-')
+		if (i == 0 && (s[i] == '-' || s[i] == '+'))
 			i++;
 		else if (!(ft_isdigit(s[i])))
 			return (0);
@@ -47,9 +47,8 @@ t_stack	*check_arg(int argc, char **argv)
 	{
 		if (ft_strisdigit(argv[i]))
 			ft_stackadd_front(&start, ft_stacknew(ft_atoi(argv[i])));
-			// res[i] = ft_atoi(argv[i]);
-		// else
-			// return (free(res), NULL);
+		else
+			return (NULL);
 		i++;
 	}
 	return (start);
@@ -88,6 +87,26 @@ void	print_stack(t_stacks *stacks)
 	}
 }
 
+int	find_duplicate_stack(t_stack *stack)
+{
+	t_stack	*head;
+	t_stack	*current;
+
+	head = stack;
+	while (head != NULL)
+	{
+		current = stack;
+		while (current != NULL)
+		{
+			if (head->content == current->content && head != current)
+				return (1);
+			current = current->next;
+		}
+		head = head->next;
+	} 
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
@@ -98,10 +117,12 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (argv[++i])
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
-			return (ft_putstr_fd("Error\n", 1), 0);
+			return (ft_putstr_fd("Error\n", 2), 0);
 	stacks = malloc(sizeof(t_stacks));
 	stacks->result = NULL;
 	stacks->a = check_arg(argc - 1, argv + 1);
+	if (find_duplicate_stack(stacks->a))
+			return (ft_putstr_fd("Error\n", 2), 0);
 	stacks->b = NULL;
 	if (stacks->a != NULL)
 	{

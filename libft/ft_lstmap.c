@@ -6,12 +6,11 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:01:43 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/17 17:12:11 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:30:16 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 /**
  * Itère sur la liste lst et applique la fonction f au 

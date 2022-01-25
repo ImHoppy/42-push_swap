@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:49:41 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/18 14:42:58 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:32:39 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+// CUSTOM
+
+int		ft_strcmp(const char *s1, const char *s2);
 #endif
