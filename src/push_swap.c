@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 17:29:32 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/26 17:34:05 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,38 @@ int	find_duplicate_stack(t_stack *stack)
 	return (0);
 }
 
+void voidfunc(void *voidarg)
+{
+	(void) voidarg;
+	return ;
+}
+
+t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
+{
+	t_list	*temp;
+	if (ft_strcmp(head->content, a) == 0 && ft_strcmp(head->next->content, b) == 0)
+	{
+		head->content = ab;
+		temp = head->next->next;
+		free(head->next);
+		head->next = temp;
+	}
+	return (head);
+}
+
+void	ss_rr_rrr(t_list *lst)
+{
+	t_list	*head;
+
+	head = lst;
+	while (head->next != NULL)
+	{
+		create_ss_rr_rrr(head, "sa", "sb", "ss");
+		create_ss_rr_rrr(head, "ra", "rb", "rr");
+		head = head->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
@@ -119,11 +151,11 @@ int	main(int argc, char **argv)
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			return (ft_putstr_fd("Error\n", 2), 0);
 	stacks = malloc(sizeof(t_stacks));
-	stacks->result = NULL;
 	stacks->a = check_arg(argc - 1, argv + 1);
 	if (find_duplicate_stack(stacks->a))
 			return (ft_putstr_fd("Error\n", 2), 0);
 	stacks->b = NULL;
+	stacks->result = NULL;
 	if (stacks->a != NULL)
 	{
 		printf("lenght:{%d}\n", ft_stacklenght(stacks->a));
@@ -132,26 +164,27 @@ int	main(int argc, char **argv)
 			printf("%d ", head->content);
 		}
 		printf("\n");
+		push_b(stacks);
+		push_b(stacks);
+		// swap_a(stacks);
 		swap_a(stacks);
 		swap_b(stacks);
-		push_b(stacks);
 		print_stack(stacks);
-		push_b(stacks);
-		push_b(stacks);
 		print_stack(stacks);
-		push_a(stacks);
-		push_a(stacks);
+		// push_a(stacks);
+		// push_a(stacks);
 		rotate_a(stacks);
 		rotate_b(stacks);
 		print_stack(stacks);
+		// swap_a(stacks);
 		reverse_rotate_a(stacks);
 		reverse_rotate_b(stacks);
 		print_stack(stacks);
 		printf("\n");
+		ss_rr_rrr(stacks->result);
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);
 		ft_lstclear(&stacks->result, &ft_putendl);
-		free(stacks->result);
 		free(stacks);
 	}
 	// while (1)
