@@ -6,7 +6,7 @@
 /*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/26 17:34:05 by hoppy            ###   ########.fr       */
+/*   Updated: 2022/01/27 12:43:54 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ void voidfunc(void *voidarg)
 t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
 {
 	t_list	*temp;
+
+	temp = NULL;
 	if (ft_strcmp(head->content, a) == 0 && ft_strcmp(head->next->content, b) == 0)
 	{
 		head->content = ab;
-		temp = head->next->next;
+		// if (head->next->next != NULL)
+			temp = head->next->next;
 		free(head->next);
 		head->next = temp;
 	}
@@ -131,10 +134,11 @@ void	ss_rr_rrr(t_list *lst)
 	t_list	*head;
 
 	head = lst;
-	while (head->next != NULL)
+	while (head != NULL && head->next != NULL)
 	{
-		create_ss_rr_rrr(head, "sa", "sb", "ss");
-		create_ss_rr_rrr(head, "ra", "rb", "rr");
+		head = create_ss_rr_rrr(head, "sa", "sb", "ss");
+		head = create_ss_rr_rrr(head, "ra", "rb", "rr");
+		head = create_ss_rr_rrr(head, "rra", "rrb", "rrr");
 		head = head->next;
 	}
 }
