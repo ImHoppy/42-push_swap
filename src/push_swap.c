@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:27:06 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/28 17:54:14 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
  * TODO:
  *  - Check MAX and MIN int 2147483647, -2147483648
  * 	- Remove gitignore
- *  - 
+ *  - 6 instrucion max for 4 number
+ *  - Rewrite instrucion for 5 number
  */
 
 #include "push_swap.h"
@@ -150,10 +151,16 @@ void	which_algo(t_stacks *stacks)
 
 	len = ft_stacklenght(stacks->a);
 	if (len == 2)
+	{
 		if (stacks->a->content > stacks->a->next->content)
 			swap_a(stacks);
-	if (len == 3)
+	}
+	else if (len == 3)
 		number_3(stacks);
+	else if (len == 4)
+		number_4(stacks);
+	else if (len == 5)
+		number_5(stacks);
 
 }
 

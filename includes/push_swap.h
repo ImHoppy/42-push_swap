@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:29:06 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/28 17:45:46 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	reverse_rotate_b(t_stacks *stacks);
 
 void	number_3(t_stacks *stacks);
 void	number_4(t_stacks *stacks);
+void	number_5(t_stacks *stacks);
 
 #endif

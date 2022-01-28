@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:31:19 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/28 17:53:19 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,34 @@ void number_4(t_stacks *stacks)
 {
 	t_stack	*head;
 	int		len;
-	int		index;
 	int		middle;
 	int		vmin;
+	void	(*ptr)(t_stacks*);
 
 	head = stacks->a;
+	len = ft_stacklenght(stacks->a);
 	middle = indexof_min(stacks->a);
 	vmin = min(stacks->a);
-	while (index <= middle)
+	if (middle < len / 2)
+		ptr = &rotate_a;
+	else
+		ptr = &reverse_rotate_a;
+	while (stacks->a->content != vmin)
 	{
-
+		ptr(stacks);
 	}
+	push_b(stacks);
+	number_3(stacks);
+	push_a(stacks);
+}
 
+void number_5(t_stacks *stacks)
+{
+	push_b(stacks);
+	number_4(stacks);
+	push_a(stacks);
+	swap_a(stacks);
+	push_b(stacks);
+	number_4(stacks);
+	push_a(stacks);
 }
