@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/27 12:43:54 by hoppy            ###   ########.fr       */
+/*   Updated: 2022/01/28 17:27:06 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_stack	*check_arg(int argc, char **argv)
 	while (i < argc)
 	{
 		if (ft_strisdigit(argv[i]))
-			ft_stackadd_front(&start, ft_stacknew(ft_atoi(argv[i])));
+			ft_stackadd_back(&start, ft_stacknew(ft_atoi(argv[i])));
 		else
 			return (NULL);
 		i++;
@@ -103,7 +103,7 @@ int	find_duplicate_stack(t_stack *stack)
 			current = current->next;
 		}
 		head = head->next;
-	} 
+	}
 	return (0);
 }
 
@@ -118,7 +118,8 @@ t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
 	t_list	*temp;
 
 	temp = NULL;
-	if (ft_strcmp(head->content, a) == 0 && ft_strcmp(head->next->content, b) == 0)
+	if (ft_strcmp(head->content, a) == 0
+		&& ft_strcmp(head->next->content, b) == 0)
 	{
 		head->content = ab;
 		// if (head->next->next != NULL)
@@ -143,6 +144,19 @@ void	ss_rr_rrr(t_list *lst)
 	}
 }
 
+void	which_algo(t_stacks *stacks)
+{
+	int	len;
+
+	len = ft_stacklenght(stacks->a);
+	if (len == 2)
+		if (stacks->a->content > stacks->a->next->content)
+			swap_a(stacks);
+	if (len == 3)
+		number_3(stacks);
+
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
@@ -157,23 +171,25 @@ int	main(int argc, char **argv)
 	stacks = malloc(sizeof(t_stacks));
 	stacks->a = check_arg(argc - 1, argv + 1);
 	if (find_duplicate_stack(stacks->a))
-			return (ft_putstr_fd("Error\n", 2), 0);
+		return (ft_putstr_fd("Error\n", 2), 0);
 	stacks->b = NULL;
 	stacks->result = NULL;
 	if (stacks->a != NULL)
 	{
-		printf("lenght:{%d}\n", ft_stacklenght(stacks->a));
-		printf("Input:%7s", "");
-		for (t_stack *head = stacks->a; head != NULL; head = head->next) {
-			printf("%d ", head->content);
-		}
-		printf("\n");
+		// printf("lenght:{%d}\n", ft_stacklenght(stacks->a));
+		// printf("Input:%7s", "");
+		// for (t_stack *head = stacks->a; head != NULL; head = head->next) {
+			// printf("%d ", head->content);
+		// }
+		// printf("\n");
+		which_algo(stacks);
+		// print_stack(stacks);
+		/*
 		push_b(stacks);
 		push_b(stacks);
 		// swap_a(stacks);
 		swap_a(stacks);
-		swap_b(stacks);
-		print_stack(stacks);
+		// swap_b(stacks);
 		print_stack(stacks);
 		// push_a(stacks);
 		// push_a(stacks);
@@ -186,6 +202,7 @@ int	main(int argc, char **argv)
 		print_stack(stacks);
 		printf("\n");
 		ss_rr_rrr(stacks->result);
+		*/
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);
 		ft_lstclear(&stacks->result, &ft_putendl);

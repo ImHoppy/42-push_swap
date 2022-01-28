@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 15:08:05 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/28 17:29:06 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ t_stack	*stack_pop(t_stack **stack);
 void	stack_push(t_stack **stack, t_stack *new);
 t_stack	*ft_stacklast(t_stack *lst);
 t_stack	*ft_stackbeforelast(t_stack *lst);
+int		indexof_min(t_stack *stack);
+int		min(t_stack *stack);
+
+// Instruction
 
 void	swap_a(t_stacks *stacks);
 void	swap_b(t_stacks *stacks);
@@ -47,5 +51,10 @@ void	rotate_a(t_stacks *stacks);
 void	rotate_b(t_stacks *stacks);
 void	reverse_rotate_a(t_stacks *stacks);
 void	reverse_rotate_b(t_stacks *stacks);
+
+// Algo
+
+void	number_3(t_stacks *stacks);
+void	number_4(t_stacks *stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 17:01:04 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/28 17:30:01 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,48 @@ void	stack_push(t_stack **stack, t_stack *new)
 		new->next = *stack;
 		*stack = new;
 	}
+}
+
+int	indexof_min(t_stack *stack)
+{
+	int		i;
+	int		min[2];
+	t_stack	*head;
+
+	i = 0;
+	head = stack;
+	min[0] = head->content;
+	min[1] = i;
+	while (head != NULL)
+	{
+		if (head->content < min[0])
+		{
+			min[0] = head->content;
+			min[1] = i;
+		}
+		head = head->next;
+		i++;
+	}
+	return (min[1]);
+}
+
+int	min(t_stack *stack)
+{
+	int		i;
+	int		min;
+	t_stack	*head;
+
+	i = 0;
+	head = stack;
+	min = head->content;
+	while (head != NULL)
+	{
+		if (head->content < min)
+		{
+			min = head->content;
+		}
+		head = head->next;
+		i++;
+	}
+	return (min);
 }
