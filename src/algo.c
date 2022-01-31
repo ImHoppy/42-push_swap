@@ -6,82 +6,32 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 19:55:31 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 20:48:56 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-void	number_3_next(t_stacks *stacks, t_stack *last)
-{
-	t_stack	*a;
-
-	a = stacks->a;
-	if (a->content < a->next->content && a->next->content > last->content
-		&& a->content > last->content)
-		reverse_rotate_a(stacks);
-	else if (a->content > a->next->content && a->next->content < last->content
-		&& a->content > last->content)
-		rotate_a(stacks);
-}
-
-void	number_3(t_stacks *stacks)
-{
-	t_stack	*a;
-	t_stack	*last;
-
-	a = stacks->a;
-	last = ft_stacklast(a);
-	if (a->content > a->next->content && a->next->content < last->content
-		&& a->content < last->content)
-		swap_a(stacks);
-	else if (a->content > a->next->content && a->next->content > last->content
-		&& a->content > last->content)
-	{
-		swap_a(stacks);
-		reverse_rotate_a(stacks);
-	}
-	else if (a->content < a->next->content && a->next->content > last->content
-		&& a->content < last->content)
-	{
-		reverse_rotate_a(stacks);
-		swap_a(stacks);
-	}
-	else
-		number_3_next(stacks, last);
-}
-
-void	number_4(t_stacks *stacks)
-{
-	push_min_top_a(stacks);
-	push_b(stacks);
-	number_3(stacks);
-	push_a(stacks);
-}
-
-void	number_5(t_stacks *stacks)
-{
-	push_min_top_a(stacks);
-	push_b(stacks);
-	push_min_top_a(stacks);
-	push_b(stacks);
-	number_3(stacks);
-	push_a(stacks);
-	push_a(stacks);
-}
 
 void	insertion_sort(t_stacks *stacks, int chunk)
 {
 	(void) chunk;
 	while (stacks->a != NULL)
 	{
-		push_min_top_a(stacks);
+		push_stack_top_a(stacks, getmin(stacks->a));
 		push_b(stacks);
 	}
 	while (stacks->b != NULL)
 		push_a(stacks);
 }
+
+void	quarter_sort(t_stacks *stacks)
+{
+	
+}
+
+// First attempt of creating my own sort
 
 // void	insertion_sort(t_stacks *stacks, int chunk)
 // {
@@ -90,13 +40,13 @@ void	insertion_sort(t_stacks *stacks, int chunk)
 // 	t_stack	*last[2];
 
 // 	// if (chunk == 0)
-// 	if (isSorted(stacks->a))
+// 	if (sorted(stacks->a))
 // 		return;
 // 	a = stacks->a;
 // 	b = stacks->b;
 // 	last[0] =	ft_stacklast(a);
 // 	last[1] =	ft_stacklast(b);
-// 	while (a->next != NULL && !isSorted(stacks->a))
+// 	while (a->next != NULL && !sorted(stacks->a))
 // 	// while (chunk != 0)
 // 	{
 // 		if (a->content > last[0]->content)

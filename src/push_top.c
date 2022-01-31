@@ -1,93 +1,83 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_min.c                                        :+:      :+:    :+:   */
+/*   push_top.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 18:30:46 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 19:55:11 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 20:15:08 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	indexof_min(t_stack *stack)
+int	indexof(t_stack *stack, t_stack *tofind)
 {
 	int		i;
-	int		min[2];
 	t_stack	*head;
 
 	i = 0;
 	head = stack;
-	min[0] = head->content;
-	min[1] = i;
 	while (head != NULL)
 	{
-		if (head->content < min[0])
-		{
-			min[0] = head->content;
-			min[1] = i;
-		}
+		if (head->content == tofind->content)
+			return (i);
 		head = head->next;
 		i++;
 	}
-	return (min[1]);
+	return (i);
 }
 
-int	min(t_stack *stack)
+t_stack	*getmin(t_stack *stack)
 {
 	int		i;
-	int		min;
+	t_stack	*min;
 	t_stack	*head;
 
 	i = 0;
 	head = stack;
-	min = head->content;
+	min = head;
 	while (head != NULL)
 	{
-		if (head->content < min)
-		{
-			min = head->content;
-		}
+		if (head->content < min->content)
+			min = head;
 		head = head->next;
 		i++;
 	}
 	return (min);
 }
 
-void	push_min_top_a(t_stacks *stacks)
+void	push_stack_top_a(t_stacks *stacks, t_stack *topush)
 {
 	int		len;
 	int		middle;
-	int		vmin;
 	void	(*ptr)(t_stacks*);
 
 	len = ft_stacklenght(stacks->a);
-	middle = indexof_min(stacks->a);
-	vmin = min(stacks->a);
+	middle = indexof(stacks->a, topush);
 	if (middle < len / 2)
 		ptr = &rotate_a;
 	else
 		ptr = &reverse_rotate_a;
-	while (stacks->a->content != vmin)
+	while (stacks->a != topush)
 		ptr(stacks);
 }
 
-void	push_min_top_b(t_stacks *stacks)
+void	push_stack_top_b(t_stacks *stacks, t_stack *topush)
 {
 	int		len;
 	int		middle;
-	int		vmin;
+	int		value;
 	void	(*ptr)(t_stacks*);
 
 	len = ft_stacklenght(stacks->b);
-	middle = indexof_min(stacks->b);
-	vmin = min(stacks->b);
+	middle = indexof(stacks->b, topush);
+	value = topush->content;
 	if (middle < len / 2)
 		ptr = &rotate_b;
 	else
 		ptr = &reverse_rotate_b;
-	while (stacks->a->content != vmin)
+	while (stacks->b != topush)
 		ptr(stacks);
 }

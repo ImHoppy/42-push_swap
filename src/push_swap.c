@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 19:34:52 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 20:17:33 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	which_algo(t_stacks *stacks)
 	int	len;
 
 	len = ft_stacklenght(stacks->a);
-	if (isSorted(stacks->a))
+	if (sorted(stacks->a))
 		return ;
 	if (len == 2)
 	{

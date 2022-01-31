@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 19:46:05 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 20:16:09 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	stack_push(t_stack **stack, t_stack *new)
 	}
 }
 
-int	isSorted(t_stack *lst)
+int	sorted(t_stack *lst)
 {
 	if (lst == NULL || lst->next == NULL)
 		return (0);
@@ -137,7 +137,7 @@ int	isSorted(t_stack *lst)
 	return (1);
 }
 
-int	is_reverse_sorted(t_stack *lst)
+int	reverse_sorted(t_stack *lst)
 {
 	if (lst == NULL || lst->next == NULL)
 		return (0);
