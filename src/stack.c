@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:30:01 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 19:46:05 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,46 +123,30 @@ void	stack_push(t_stack **stack, t_stack *new)
 	}
 }
 
-int	indexof_min(t_stack *stack)
+int	isSorted(t_stack *lst)
 {
-	int		i;
-	int		min[2];
-	t_stack	*head;
-
-	i = 0;
-	head = stack;
-	min[0] = head->content;
-	min[1] = i;
-	while (head != NULL)
+	if (lst == NULL || lst->next == NULL)
+		return (0);
+	while (lst->next != NULL)
 	{
-		if (head->content < min[0])
-		{
-			min[0] = head->content;
-			min[1] = i;
-		}
-		head = head->next;
-		i++;
+		if (lst->content < lst->next->content)
+			lst = lst->next;
+		else
+			return (0);
 	}
-	return (min[1]);
+	return (1);
 }
 
-int	min(t_stack *stack)
+int	is_reverse_sorted(t_stack *lst)
 {
-	int		i;
-	int		min;
-	t_stack	*head;
-
-	i = 0;
-	head = stack;
-	min = head->content;
-	while (head != NULL)
+	if (lst == NULL || lst->next == NULL)
+		return (0);
+	while (lst->next != NULL)
 	{
-		if (head->content < min)
-		{
-			min = head->content;
-		}
-		head = head->next;
-		i++;
+		if (lst->content > lst->next->content)
+			lst = lst->next;
+		else
+			return (0);
 	}
-	return (min);
+	return (1);
 }

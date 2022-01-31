@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:45:46 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 19:39:45 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ t_stack	*ft_stacklast(t_stack *lst);
 t_stack	*ft_stackbeforelast(t_stack *lst);
 int		indexof_min(t_stack *stack);
 int		min(t_stack *stack);
+void	push_min_top_a(t_stacks *stacks);
+void	push_min_top_b(t_stacks *stacks);
+int		isSorted(t_stack *lst);
+int		is_reverse_sorted(t_stack *lst);
 
 // Instruction
 
@@ -57,5 +61,6 @@ void	reverse_rotate_b(t_stacks *stacks);
 void	number_3(t_stacks *stacks);
 void	number_4(t_stacks *stacks);
 void	number_5(t_stacks *stacks);
+void	insertion_sort(t_stacks *stacks, int chunk);
 
 #endif

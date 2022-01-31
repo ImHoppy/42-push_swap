@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/28 17:54:14 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/01/31 19:34:52 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,7 @@ void	ft_putendl(void *s)
 
 void	print_stack(t_stacks *stacks)
 {
-	// t_stack *head_a = stacks->a;
-	// t_stack *head_b = stacks->b;
-	// while (head_a != NULL && head_b != NULL)
-	// {
-	// 	if (head_a->next != NULL)
-	// 		head_a = head_a->next;
-	// 	if (head_b->next != NULL)
-	// 		head_b = head_b->next;
-	// 	printf("%5d %d\n", head_a->content, head_b->content);
-	// }
 	printf("\n----------\n");
-	// (void)stacks;
 	printf("StackA:%6s", "");
 	for (t_stack *head = stacks->a; head != NULL; head = head->next) {
 		printf("%d ", head->content);
@@ -108,12 +97,6 @@ int	find_duplicate_stack(t_stack *stack)
 	return (0);
 }
 
-void voidfunc(void *voidarg)
-{
-	(void) voidarg;
-	return ;
-}
-
 t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
 {
 	t_list	*temp;
@@ -123,8 +106,7 @@ t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
 		&& ft_strcmp(head->next->content, b) == 0)
 	{
 		head->content = ab;
-		// if (head->next->next != NULL)
-			temp = head->next->next;
+		temp = head->next->next;
 		free(head->next);
 		head->next = temp;
 	}
@@ -150,6 +132,8 @@ void	which_algo(t_stacks *stacks)
 	int	len;
 
 	len = ft_stacklenght(stacks->a);
+	if (isSorted(stacks->a))
+		return ;
 	if (len == 2)
 	{
 		if (stacks->a->content > stacks->a->next->content)
@@ -161,7 +145,10 @@ void	which_algo(t_stacks *stacks)
 		number_4(stacks);
 	else if (len == 5)
 		number_5(stacks);
-
+	else if (len > 5 && len <= 100)
+		insertion_sort(stacks, 5);
+	else if (len > 100 && len <= 500)
+		insertion_sort(stacks, 11);
 }
 
 int	main(int argc, char **argv)
