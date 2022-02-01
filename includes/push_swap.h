@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 20:17:49 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/01 17:31:18 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int		sorted(t_stack *lst);
 int		reverse_sorted(t_stack *lst);
 int		indexof(t_stack *stack, t_stack *tofind);
 void	push_stack_top_a(t_stacks *stacks, t_stack *topush);
+void	push_stack_top_b(t_stacks *stacks, t_stack *topush);
 t_stack	*getmin(t_stack *stack);
+t_stack	*getmax(t_stack *stack);
 
 // Instruction
 
@@ -61,5 +63,6 @@ void	number_3(t_stacks *stacks);
 void	number_4(t_stacks *stacks);
 void	number_5(t_stacks *stacks);
 void	insertion_sort(t_stacks *stacks, int chunk);
+void	quarter_sort(t_stacks *stacks);
 
 #endif

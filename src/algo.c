@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 20:48:56 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/01 16:58:01 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,154 @@ void	insertion_sort(t_stacks *stacks, int chunk)
 		push_a(stacks);
 }
 
+int	sumStack(t_stack *stack)
+{
+	t_stack	*head;
+	int		sum;
+
+	head = stack;
+	sum = 0;
+	while (head != NULL)
+	{
+		sum += head->content;
+		head = head->next;
+	}
+	return (sum);
+}
+
+
+void	reverse_or_rotate_a(t_stacks *stacks, t_stack *topush)
+{
+	int		len;
+	int		middle;
+	void	(*ptr)(t_stacks*);
+
+	len = ft_stacklenght(stacks->a);
+	middle = indexof(stacks->a, topush);
+	if (middle < len / 2)
+		ptr = &rotate_a;
+	else
+		ptr = &reverse_rotate_a;
+	ptr(stacks);
+}
+
+void	reverse_or_rotate_b(t_stacks *stacks, t_stack *topush)
+{
+	int		len;
+	int		middle;
+	void	(*ptr)(t_stacks*);
+
+	len = ft_stacklenght(stacks->b);
+	middle = indexof(stacks->b, topush);
+	if (middle < len / 2)
+		ptr = &rotate_b;
+	else
+		ptr = &reverse_rotate_b;
+	ptr(stacks);
+}
+
+void	push_average_a(t_stacks *stacks, t_stack *topush, int average)
+{
+	while (stacks->a != topush)
+	{
+		if (stacks->a->content <= average)
+			push_b(stacks);
+		else
+			rotate_a(stacks);
+	}
+}
+
+void	split_stack_a(t_stacks *stacks)
+{
+	int		size;
+	int		average;
+	t_stack	*min;
+	
+	size = ft_stacklenght(stacks->a);
+	average = sumStack(stacks->a) / size;
+	min = getmin(stacks->a);
+	while (min->content <= average)
+	{
+		if (stacks->a->content <= average)
+			push_b(stacks);
+		else
+			push_average_a(stacks, min, average);
+		min = getmin(stacks->a);
+	}
+}
+#include <stdio.h>
+int	calc_distance(t_stack *stack, t_stack *min, t_stack *max)
+{
+	int	min_index;
+	int	max_index;
+	int min_res;
+	int max_res;
+	int	size;
+	int ret;
+
+	size = ft_stacklenght(stack);
+	min_index = indexof(stack, min);
+	max_index = indexof(stack, max);
+	min_res = 	min_index  ;
+	max_res = 	max_index  ;
+	
+	ret = min_res < max_res;
+	return (ret);
+}
+
+int	push_max_min(t_stacks *stacks)
+{
+	t_stack	*min;
+	t_stack	*max;
+	int		maxaction;
+
+	maxaction = 0;
+	while (stacks->b != NULL)
+	{
+		min = getmin(stacks->b);
+		max = getmax(stacks->b);
+		if (stacks->b == max)
+		{
+			push_a(stacks);
+			maxaction++;
+		}
+		if (stacks->b == min)
+		{
+			push_a(stacks);
+			rotate_a(stacks);
+		}
+
+		if (calc_distance(stacks->b, min, max) == 0)
+			reverse_or_rotate_b(stacks, min);
+		else
+			reverse_or_rotate_b(stacks, max);
+		// rotate_b(stacks);
+	}
+	return (maxaction);
+}
+
 void	quarter_sort(t_stacks *stacks)
 {
-	
+
+	split_stack_a(stacks);
+	int remaning = ft_stacklenght(stacks->a);
+	int max = push_max_min(stacks);
+	while (max-- != 0)
+	{
+		rotate_a(stacks);
+	}
+	while (remaning-- != 0)
+	{
+		push_b(stacks);
+	}
+	max = push_max_min(stacks);
+
+	while (max-- != 0)
+	{
+		rotate_a(stacks);
+	}
+	// split_stack_a(stacks);
+	// split_stack_b(stacks);
 }
 
 // First attempt of creating my own sort

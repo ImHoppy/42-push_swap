@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 20:17:33 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/01 17:31:14 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,27 @@ int	ft_strisdigit(char *s)
 	return (1);
 }
 
+
+
+
 t_stack	*check_arg(int argc, char **argv)
 {
 	int		i;
 	t_stack	*start;
+	t_stack	*new;
 
 	start = NULL;
 	i = 0;
 	while (i < argc)
 	{
 		if (ft_strisdigit(argv[i]))
-			ft_stackadd_back(&start, ft_stacknew(ft_atoi(argv[i])));
+		{
+			new = ft_stacknew(ft_atoi(argv[i]));
+			if (new != NULL)
+				ft_stackadd_back(&start, new);
+			else
+				return (ft_stackclear(&start), NULL);
+		}
 		else
 			return (NULL);
 		i++;
@@ -146,7 +156,8 @@ void	which_algo(t_stacks *stacks)
 	else if (len == 5)
 		number_5(stacks);
 	else if (len > 5 && len <= 100)
-		insertion_sort(stacks, 5);
+		// insertion_sort(stacks, 5);
+		quarter_sort(stacks);
 	else if (len > 100 && len <= 500)
 		insertion_sort(stacks, 11);
 }
@@ -163,6 +174,8 @@ int	main(int argc, char **argv)
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			return (ft_putstr_fd("Error\n", 2), 0);
 	stacks = malloc(sizeof(t_stacks));
+	if (stacks == NULL)
+		return (ft_putstr_fd("Error\n", 2), 0);
 	stacks->a = check_arg(argc - 1, argv + 1);
 	if (find_duplicate_stack(stacks->a))
 		return (ft_putstr_fd("Error\n", 2), 0);
@@ -170,40 +183,13 @@ int	main(int argc, char **argv)
 	stacks->result = NULL;
 	if (stacks->a != NULL)
 	{
-		// printf("lenght:{%d}\n", ft_stacklenght(stacks->a));
-		// printf("Input:%7s", "");
-		// for (t_stack *head = stacks->a; head != NULL; head = head->next) {
-			// printf("%d ", head->content);
-		// }
-		// printf("\n");
 		which_algo(stacks);
-		// print_stack(stacks);
-		/*
-		push_b(stacks);
-		push_b(stacks);
-		// swap_a(stacks);
-		swap_a(stacks);
-		// swap_b(stacks);
-		print_stack(stacks);
-		// push_a(stacks);
-		// push_a(stacks);
-		rotate_a(stacks);
-		rotate_b(stacks);
-		print_stack(stacks);
-		// swap_a(stacks);
-		reverse_rotate_a(stacks);
-		reverse_rotate_b(stacks);
-		print_stack(stacks);
-		printf("\n");
 		ss_rr_rrr(stacks->result);
-		*/
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);
 		ft_lstclear(&stacks->result, &ft_putendl);
-		free(stacks);
 	}
-	// while (1)
-		// ;;
+	free(stacks);
 	return (0);
 }
 

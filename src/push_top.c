@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 18:30:46 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 20:15:08 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/01 15:10:38 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,25 @@ t_stack	*getmin(t_stack *stack)
 		i++;
 	}
 	return (min);
+}
+
+t_stack	*getmax(t_stack *stack)
+{
+	int		i;
+	t_stack	*max;
+	t_stack	*head;
+
+	i = 0;
+	head = stack;
+	max = head;
+	while (head != NULL)
+	{
+		if (head->content > max->content)
+			max = head;
+		head = head->next;
+		i++;
+	}
+	return (max);
 }
 
 void	push_stack_top_a(t_stacks *stacks, t_stack *topush)
