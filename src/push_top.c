@@ -87,12 +87,12 @@ void	push_stack_top_b(t_stacks *stacks, t_stack *topush)
 {
 	int		len;
 	int		middle;
-	int		value;
+	// int		value;
 	void	(*ptr)(t_stacks*);
 
 	len = ft_stacklenght(stacks->b);
 	middle = indexof(stacks->b, topush);
-	value = topush->content;
+	// value = topush->content;
 	if (middle < len / 2)
 		ptr = &rotate_b;
 	else

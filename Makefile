@@ -26,13 +26,13 @@ endif
 $(EXEC): $(OBJ)
 	@make -C $(LIBFT) bonus
 	$(CC) $(OBJ) $(LFLAGS) -L$(LIBFT) -lft -o $@
-	@echo "$(COLOR)[32mCompiled "$@" successfully! $(COLOR)[0m"
+	@printf "$(COLOR)[32mCompiled "$@" successfully! $(COLOR)[0m\n"
 #	$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p ${OBJ_DIR}
 	$(CC) $(CFLAGS) -I$(LIBFT) -c $< -o $@
-	@echo "$(COLOR)[34mCompiled "$<" successfully! $(COLOR)[0m"
+	@printf "$(COLOR)[34mCompiled "$<" successfully! $(COLOR)[0m\n"
 
 
 all: $(EXEC)

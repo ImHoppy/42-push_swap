@@ -21,24 +21,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	ft_strisdigit(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (i == 0 && (s[i] == '-' || s[i] == '+'))
-			i++;
-		else if (!(ft_isdigit(s[i])))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-
-
 
 t_stack	*check_arg(int argc, char **argv)
 {
@@ -172,7 +154,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (argv[++i])
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
-			return (ft_putstr_fd("Error\n", 2), 0);
+			error(NULL);
 	stacks = malloc(sizeof(t_stacks));
 	if (stacks == NULL)
 		return (ft_putstr_fd("Error\n", 2), 0);

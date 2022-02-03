@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 16:58:01 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/03 17:23:30 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ int	calc_distance(t_stack *stack, t_stack *min, t_stack *max)
 	int	max_index;
 	int min_res;
 	int max_res;
-	int	size;
+	// int	size;
 	int ret;
 
-	size = ft_stacklenght(stack);
+	// size = ft_stacklenght(stack);
 	min_index = indexof(stack, min);
 	max_index = indexof(stack, max);
 	min_res = 	min_index  ;
@@ -142,10 +142,10 @@ int	push_max_min(t_stacks *stacks)
 			push_a(stacks);
 			rotate_a(stacks);
 		}
-
-		if (calc_distance(stacks->b, min, max) == 0)
-			reverse_or_rotate_b(stacks, min);
-		else
+		printf("%d\n",calc_distance(stacks->b, min, max));
+		// if (calc_distance(stacks->b, min, max) == 0)
+			// reverse_or_rotate_b(stacks, min);
+		// else
 			reverse_or_rotate_b(stacks, max);
 		// rotate_b(stacks);
 	}

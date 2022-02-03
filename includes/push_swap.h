@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 17:31:18 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/03 17:21:17 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	push_stack_top_a(t_stacks *stacks, t_stack *topush);
 void	push_stack_top_b(t_stacks *stacks, t_stack *topush);
 t_stack	*getmin(t_stack *stack);
 t_stack	*getmax(t_stack *stack);
+
+// UTILS
+
+int		ft_strisdigit(char *s);
+void	error(t_stacks *stacks);
 
 // Instruction
 
