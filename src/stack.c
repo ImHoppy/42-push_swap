@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 12:25:44 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 17:04:22 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_stack	*ft_stacknew(int content)
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	new->prev = NULL;
+	*new = (t_stack){.content = content};
 	return (new);
 }
 

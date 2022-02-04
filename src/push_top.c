@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 18:30:46 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 11:14:02 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 14:59:50 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@ int	indexof(t_stack *stack, t_stack *tofind)
 			return (i);
 		head = head->next;
 		i++;
+	}
+	return (i);
+}
+
+int	reverse_indexof(t_stack *stack, t_stack *tofind)
+{
+	int		i;
+	t_stack	*head;
+
+	i = ft_stacklenght(stack);
+	head = ft_stacklast(stack);
+	while (head != NULL && head->prev != NULL && i)
+	{
+		if (head->content == tofind->content)
+			return (i);
+		head = head->prev;
+		i--;
 	}
 	return (i);
 }

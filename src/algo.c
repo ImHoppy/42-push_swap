@@ -6,17 +6,98 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 12:33:13 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 18:28:20 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+
+
+
+void	forward_index(t_stack *stack)
+{
+	t_stack *head;
+
+	head = stack;
+	while (head != NULL)
+	{
+		if (stack->content < head->content)
+			head->index++;
+		else
+			stack->index++;
+		head = head->next;
+	}
+}
+
+int	which_chunk(t_stack *stack, int chunk)
+{
+	// int	max;
+
+	// max = getmax(stack)
+	while (chunk)
+	{
+		if (stack->index > 20*chunk)
+		{
+			break;
+		}
+		chunk--;
+	}
+	return (chunk + 1);
+}
+
+#include <stdio.h>
+void	set_index(t_stack *stack)
+{
+	t_stack *head;
+	t_stack *head1;
+
+	head = stack;
+	while (head != NULL)
+	{
+		head1 = head;
+		while (head1 != NULL)
+		{
+			if (head->content < head1->content)
+				head1->index++;
+			else
+				head->index++;
+			head1 = head1->next;
+		}
+		head = head->next;
+	}
+}
+
+void	push_b_chunk(t_stacks *stacks, int chunk, int currentchunk)
+{
+	t_stack	*head;
+
+	head = stacks->a;
+	while (head != NULL && which_chunk(head, chunk) != currentchunk)
+	{
+		if (which_chunk(head, chunk) == currentchunk)
+		{
+			reverse_or_rotate_a(stacks, head);
+			push_b(stacks);
+		}
+		head = head->next;
+	}
+}
+
 void	chunk_sort(t_stacks *stacks, int chunk)
 {
-	(void) stacks;
-	(void) chunk;
+	int	len;
+	set_index(stacks->a);
+	len = ft_stacklenght(stacks->a);
+	if (chunk != 5 | chunk != 11)
+		chunk = len / 20;
+	// for (int i = 0; i != 100; i++)
+	push_b_chunk(stacks, chunk, 5);
+	// for (t_stack *head = stacks->a; head != NULL; head = head->next) {
+		// printf("{%d} ", which_chunk(head, 5));
+	// }
 }
+
 
 void	insertion_sort(t_stacks *stacks)
 {
@@ -45,35 +126,7 @@ int	sumStack(t_stack *stack)
 }
 
 
-void	reverse_or_rotate_a(t_stacks *stacks, t_stack *topush)
-{
-	int		len;
-	int		middle;
-	void	(*ptr)(t_stacks*);
 
-	len = ft_stacklenght(stacks->a);
-	middle = indexof(stacks->a, topush);
-	if (middle < len / 2)
-		ptr = &rotate_a;
-	else
-		ptr = &reverse_rotate_a;
-	ptr(stacks);
-}
-
-void	reverse_or_rotate_b(t_stacks *stacks, t_stack *topush)
-{
-	int		len;
-	int		middle;
-	void	(*ptr)(t_stacks*);
-
-	len = ft_stacklenght(stacks->b);
-	middle = indexof(stacks->b, topush);
-	if (middle < len / 2)
-		ptr = &rotate_b;
-	else
-		ptr = &reverse_rotate_b;
-	ptr(stacks);
-}
 
 void	push_average_a(t_stacks *stacks, t_stack *topush, int average)
 {

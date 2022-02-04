@@ -6,16 +6,14 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 13:30:06 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 18:00:39 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /** 
  * TODO:
- *  - Check MAX and MIN int 2147483647, -2147483648
+ *  - Check MAX and MIN int 2147483647, -2147483648 ?? DONE
  * 	- Remove gitignore
- *  - 6 instrucion max for 4 number
- *  - Rewrite instrucion for 5 number
  */
 
 #include "push_swap.h"
@@ -35,6 +33,10 @@ t_stack	*check_arg(int argc, char **argv)
 		if (ft_strisdigit(argv[i]))
 		{
 			new = ft_stacknew(ft_atoi(argv[i]));
+			if (new->content == 0 && argv[i][0] != '0')
+				return (ft_stackclear(&start), NULL);
+			if (new->content == -1 && argv[i][1] != '1')
+				return (ft_stackclear(&start), NULL);
 			if (new != NULL)
 				ft_stackadd_back(&start, new);
 			else
@@ -61,11 +63,11 @@ void	print_stack(t_stacks *stacks)
 	printf("\n----------\n");
 	printf("StackA:%6s", "");
 	for (t_stack *head = stacks->a; head != NULL; head = head->next) {
-		printf("%d ", head->content);
+		printf("%d:%d ", head->content, head->index);
 	}
 	printf("\nStackB:%6s", "");
 	for (t_stack *head = stacks->b; head != NULL; head = head->next) {
-		printf("%d ", head->content);
+		printf("%d:%d ", head->content, head->index);
 	}
 }
 
@@ -139,7 +141,7 @@ void	which_algo(t_stacks *stacks)
 		number_5(stacks);
 	else if (len > 5 && len <= 100)
 		// insertion_sort(stacks, 5);
-		quarter_sort(stacks);
+		chunk_sort(stacks, 5);
 	else if (len > 100 && len <= 500)
 		quarter_sort(stacks);
 }
@@ -161,11 +163,12 @@ int	main(int argc, char **argv)
 	stacks->a = check_arg(argc - 1, argv + 1);
 	stacks->b = NULL;
 	stacks->result = NULL;
-	if (find_duplicate_stack(stacks->a))
+	if (stacks->a == NULL || find_duplicate_stack(stacks->a))
 		error(stacks);
 	if (stacks->a != NULL)
 	{
 		which_algo(stacks);
+		// print_stack(stacks);
 		ss_rr_rrr(stacks->result);
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);

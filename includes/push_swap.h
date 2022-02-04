@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 12:11:09 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 18:13:54 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_stack
 	int				content;
 	struct s_stack	*next;
 	struct s_stack	*prev;
+	int				index;
 }					t_stack;
 
 typedef struct s_stacks
@@ -42,6 +43,7 @@ t_stack	*ft_stackbeforelast(t_stack *lst);
 int		sorted(t_stack *lst);
 int		reverse_sorted(t_stack *lst);
 int		indexof(t_stack *stack, t_stack *tofind);
+int		reverse_indexof(t_stack *stack, t_stack *tofind);
 void	push_stack_top_a(t_stacks *stacks, t_stack *topush);
 void	push_stack_top_b(t_stacks *stacks, t_stack *topush);
 t_stack	*getmin(t_stack *stack);
@@ -70,5 +72,10 @@ void	number_4(t_stacks *stacks);
 void	number_5(t_stacks *stacks);
 void	insertion_sort(t_stacks *stacks);
 void	quarter_sort(t_stacks *stacks);
+void	chunk_sort(t_stacks *stacks, int chunk);
+
+void	reverse_or_rotate_a(t_stacks *stacks, t_stack *topush);
+
+void	reverse_or_rotate_b(t_stacks *stacks, t_stack *topush);
 
 #endif
