@@ -6,17 +6,20 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 11:03:03 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 12:33:13 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-
-void	insertion_sort(t_stacks *stacks, int chunk)
+void	chunk_sort(t_stacks *stacks, int chunk)
 {
+	(void) stacks;
 	(void) chunk;
+}
+
+void	insertion_sort(t_stacks *stacks)
+{
 	while (stacks->a != NULL)
 	{
 		push_stack_top_a(stacks, getmin(stacks->a));
@@ -151,6 +154,7 @@ int	push_max_min(t_stacks *stacks)
 	maxaction = 0;
 	while (stacks->b != NULL)
 	{
+
 		min = getmin(stacks->b);
 		max = getmax(stacks->b);
 		if (stacks->b == max)

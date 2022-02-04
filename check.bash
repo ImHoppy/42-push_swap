@@ -30,9 +30,24 @@ function change_color() {
       }}'
 }
 
+function check_error() {
+	printf "${COLOR_BLUE}Test of Error numbers:\n$COLOR_NC"
+	valgrind --leak-check=full ./push_swap $array &> output.log && grep -A5 "LEAK SUMMARY:" output.log && rm output.log
+	for i in "${array[@]}"
+	do
+		OUT=$(./push_swap $i)
+		echo $OUT | tr ' ' '\n' | ./checker_linux $i | change_color | tr '\n' ' '
+	done
+	echo ""
+}
+
 function testarray() {
-	for i in "${array[@]}";	do len=$(echo "$(echo $i | tr -d ' ' | wc -c)-1" | bc); break; done
+	len=$(echo $array[1] | tr ' ' '\n' | wc -l);
 	printf "${COLOR_BLUE}Test of %d numbers:\n$COLOR_NC" $len
+	valgrind --leak-check=full ./push_swap $array &> output.log && grep -A5 "LEAK SUMMARY:" output.log && rm output.log
+	OUT=$(./push_swap)
+	echo $OUT | tr ' ' '\n' | ./checker_linux | change_color | tr '\n' ' '
+	echo $OUT | wc -w | tr '\n' ' '
 	for i in "${array[@]}"
 	do
 		OUT=$(./push_swap $i)
@@ -42,11 +57,34 @@ function testarray() {
 	echo ""
 }
 
+function testbig() {
+	len=$(echo $(ruby -e "puts (1..$1).to_a.shuffle.join(' ')") | wc -w);
+	printf "${COLOR_BLUE}Test of %d numbers:\n$COLOR_NC" $len
+	valgrind --leak-check=full ./push_swap $(ruby -e "puts (1..$1).to_a.shuffle.join(' ')") &> output.log && grep -A5 "LEAK SUMMARY:" output.log
+	for (( c=0; c<=$2; c++ ))
+	do
+		ARGS=$(ruby -e "puts (1..$1).to_a.shuffle.join(' ')")
+		OUT=$(./push_swap $ARGS)
+		echo $OUT | tr ' ' '\n' | ./checker_linux $ARGS | change_color | tr '\n' ' '
+		echo $OUT | wc -w | tr '\n' ' '
+	done
+	echo ""
+}
+
 make
 
+array=("1 2 3" " 1 2 2 3" "1 2 one 3")
+check_error 
 array=( "2 1 3" "3 2 1" "1 3 2" "2 3 1" "3 1 2")
 testarray 
 array=("1 2 4 3" "1 3 2 4" "1 3 4 2" "1 4 2 3" "1 4 3 2" "2 1 3 4" "2 1 4 3" "2 3 1 4" "2 3 4 1" "2 4 1 3" "2 4 3 1" "3 1 2 4" "3 1 4 2" "3 2 1 4" "3 2 4 1" "3 4 1 2" "3 4 2 1" "4 1 2 3" "4 1 3 2" "4 2 1 3" "4 2 3 1" "4 3 1 2" "4 3 2 1")
 testarray 
 array=("1 2 3 5 4" "1 2 4 3 5" "1 2 4 5 3" "1 2 5 3 4" "1 2 5 4 3" "1 3 2 4 5" "1 3 2 5 4" "1 3 4 2 5" "1 3 4 5 2" "1 3 5 2 4" "1 3 5 4 2" "1 4 2 3 5" "1 4 2 5 3" "1 4 3 2 5" "1 4 3 5 2" "1 4 5 2 3" "1 4 5 3 2" "1 5 2 3 4" "1 5 2 4 3" "1 5 3 2 4" "1 5 3 4 2" "1 5 4 2 3" "1 5 4 3 2" "2 1 3 4 5" "2 1 3 5 4" "2 1 4 3 5" "2 1 4 5 3" "2 1 5 3 4" "2 1 5 4 3" "2 3 1 4 5" "2 3 1 5 4" "2 3 4 1 5" "2 3 4 5 1" "2 3 5 1 4" "2 3 5 4 1" "2 4 1 3 5" "2 4 1 5 3" "2 4 3 1 5" "2 4 3 5 1" "2 4 5 1 3" "2 4 5 3 1" "2 5 1 3 4" "2 5 1 4 3" "2 5 3 1 4" "2 5 3 4 1" "2 5 4 1 3" "2 5 4 3 1" "3 1 2 4 5" "3 1 2 5 4" "3 1 4 2 5" "3 1 4 5 2" "3 1 5 2 4" "3 1 5 4 2" "3 2 1 4 5" "3 2 1 5 4" "3 2 4 1 5" "3 2 4 5 1" "3 2 5 1 4" "3 2 5 4 1" "3 4 1 2 5" "3 4 1 5 2" "3 4 2 1 5" "3 4 2 5 1" "3 4 5 1 2" "3 4 5 2 1" "3 5 1 2 4" "3 5 1 4 2" "3 5 2 1 4" "3 5 2 4 1" "3 5 4 1 2" "3 5 4 2 1" "4 1 2 3 5" "4 1 2 5 3" "4 1 3 2 5" "4 1 3 5 2" "4 1 5 2 3" "4 1 5 3 2" "4 2 1 3 5" "4 2 1 5 3" "4 2 3 1 5" "4 2 3 5 1" "4 2 5 1 3" "4 2 5 3 1" "4 3 1 2 5" "4 3 1 5 2" "4 3 2 1 5" "4 3 2 5 1" "4 3 5 1 2" "4 3 5 2 1" "4 5 1 2 3" "4 5 1 3 2" "4 5 2 1 3" "4 5 2 3 1" "4 5 3 1 2" "4 5 3 2 1" "5 1 2 3 4" "5 1 2 4 3" "5 1 3 2 4" "5 1 3 4 2" "5 1 4 2 3" "5 1 4 3 2" "5 2 1 3 4" "5 2 1 4 3" "5 2 3 1 4" "5 2 3 4 1" "5 2 4 1 3" "5 2 4 3 1" "5 3 1 2 4" "5 3 1 4 2" "5 3 2 1 4" "5 3 2 4 1" "5 3 4 1 2" "5 3 4 2 1" "5 4 1 2 3" "5 4 1 3 2" "5 4 2 1 3" "5 4 2 3 1" "5 4 3 1 2" "5 4 3 2 1")
-testarray 
+testarray
+testbig "21" "50"
+testbig "42" "50"
+testbig "100" "75"
+testbig "500" "25"
+
+
+rm output.log

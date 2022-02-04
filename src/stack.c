@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/31 20:16:09 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 12:25:44 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_stack	*ft_stacknew(int content)
 		return (NULL);
 	new->content = content;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -29,6 +30,7 @@ void	ft_stackadd_front(t_stack **alst, t_stack *new)
 	if (alst == NULL || new == NULL)
 		return ;
 	new->next = *alst;
+	new->next->prev = new;
 	*alst = new;
 }
 
@@ -46,7 +48,10 @@ void	ft_stackadd_back(t_stack **alst, t_stack *new)
 	new->next = NULL;
 	last = ft_stacklast(*alst);
 	if (last != NULL)
+	{
 		last->next = new;
+		new->prev = last;
+	}
 }
 
 int	ft_stacklenght(t_stack *lst)
@@ -106,6 +111,10 @@ t_stack	*stack_pop(t_stack **stack)
 
 	popped = *stack;
 	(*stack) = (*stack)->next;
+	if (*stack != NULL) 
+		(*stack)->prev = NULL;
+	if (popped->prev != NULL) 
+		popped->prev->next = NULL;
 	popped->next = NULL;
 	return (popped);
 }
@@ -119,6 +128,8 @@ void	stack_push(t_stack **stack, t_stack *new)
 	else
 	{
 		new->next = *stack;
+		if (new->next != NULL)
+			new->next->prev = new;
 		*stack = new;
 	}
 }

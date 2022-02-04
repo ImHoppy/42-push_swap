@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 11:09:18 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 13:30:06 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,12 @@ int	main(int argc, char **argv)
 			error(NULL);
 	stacks = malloc(sizeof(t_stacks));
 	if (stacks == NULL)
-		return (ft_putstr_fd("Error\n", 2), 0);
+		error(stacks);
 	stacks->a = check_arg(argc - 1, argv + 1);
-	if (find_duplicate_stack(stacks->a))
-		return (ft_putstr_fd("Error\n", 2), 0);
 	stacks->b = NULL;
 	stacks->result = NULL;
+	if (find_duplicate_stack(stacks->a))
+		error(stacks);
 	if (stacks->a != NULL)
 	{
 		which_algo(stacks);

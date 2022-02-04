@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/03 17:21:17 by hoppy            ###   ########.fr       */
+/*   Updated: 2022/02/04 12:11:09 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_stack
 {
 	int				content;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }					t_stack;
 
 typedef struct s_stacks
@@ -67,7 +68,7 @@ void	reverse_rotate_b(t_stacks *stacks);
 void	number_3(t_stacks *stacks);
 void	number_4(t_stacks *stacks);
 void	number_5(t_stacks *stacks);
-void	insertion_sort(t_stacks *stacks, int chunk);
+void	insertion_sort(t_stacks *stacks);
 void	quarter_sort(t_stacks *stacks);
 
 #endif

@@ -19,13 +19,13 @@ int	ft_strisdigit(char *s)
 void	error(t_stacks *stacks)
 {
 	ft_putstr_fd("Error\n", 2);
-	if (!stacks)
+	if (stacks == NULL)
 		exit(EXIT_FAILURE);
-	if (stacks->a)
+	if (stacks->a != NULL)
 		ft_stackclear(&stacks->a);
-	if (stacks->b)
+	if (stacks->b != NULL)
 		ft_stackclear(&stacks->b);
-	if (stacks->result)
+	if (stacks->result != NULL)
 		ft_lstclear(&stacks->result, NULL);
 	free(stacks);
 	exit(EXIT_FAILURE);
