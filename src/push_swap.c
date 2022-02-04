@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 17:31:14 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 11:09:18 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	which_algo(t_stacks *stacks)
 		// insertion_sort(stacks, 5);
 		quarter_sort(stacks);
 	else if (len > 100 && len <= 500)
-		insertion_sort(stacks, 11);
+		quarter_sort(stacks);
 }
 
 int	main(int argc, char **argv)

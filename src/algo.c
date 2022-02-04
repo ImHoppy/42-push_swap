@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/03 17:23:30 by hoppy            ###   ########.fr       */
+/*   Updated: 2022/02/04 11:03:03 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,21 +104,42 @@ void	split_stack_a(t_stacks *stacks)
 #include <stdio.h>
 int	calc_distance(t_stack *stack, t_stack *min, t_stack *max)
 {
-	int	min_index;
-	int	max_index;
-	int min_res;
-	int max_res;
-	// int	size;
-	int ret;
+	// int	min_index;
+	// int	max_index;
+	// int min_res;
+	// int max_res;
+	int	size;
+	// int ret;
+	int	i = 0;
+	t_stack *head = stack;
+	size = ft_stacklenght(stack);
+	while (i <= size / 2 && head != NULL && head->next != NULL)
+	{
+		if (head == min)
+			return (0);
+		if (head == max)
+			return (1);
+		head = head->next;
+		i++;
+	}
 
-	// size = ft_stacklenght(stack);
-	min_index = indexof(stack, min);
-	max_index = indexof(stack, max);
-	min_res = 	min_index  ;
-	max_res = 	max_index  ;
+	i = size / 2;
+	while (i < size && head != NULL && head->next != NULL)
+	{
+		if (head == min)
+			return (1);
+		if (head == max)
+			return (0);
+		head = head->next;
+		i++;
+	}
+	// min_index = indexof(stack, min);
+	// max_index = indexof(stack, max);
+	// min_res = 	min_index  ;
+	// max_res = 	max_index  ;
 	
-	ret = min_res < max_res;
-	return (ret);
+	// ret = min_res < max_res;
+	return (0);
 }
 
 int	push_max_min(t_stacks *stacks)
@@ -142,10 +163,10 @@ int	push_max_min(t_stacks *stacks)
 			push_a(stacks);
 			rotate_a(stacks);
 		}
-		printf("%d\n",calc_distance(stacks->b, min, max));
-		// if (calc_distance(stacks->b, min, max) == 0)
-			// reverse_or_rotate_b(stacks, min);
-		// else
+		// printf("%d\n",calc_distance(stacks->b, min, max));
+		if (calc_distance(stacks->b, min, max) == 0)
+			reverse_or_rotate_b(stacks, min);
+		else
 			reverse_or_rotate_b(stacks, max);
 		// rotate_b(stacks);
 	}
@@ -166,6 +187,7 @@ void	quarter_sort(t_stacks *stacks)
 	{
 		push_b(stacks);
 	}
+
 	max = push_max_min(stacks);
 
 	while (max-- != 0)

@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:27:44 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 14:11:19 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 11:39:40 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	number_4(t_stacks *stacks)
 
 void	number_5(t_stacks *stacks)
 {
+	// if (stacks->a->content > stacks->a->next->content)
+		// swap_a(stacks);
 	push_stack_top_a(stacks, getmin(stacks->a));
 	push_b(stacks);
 	push_stack_top_a(stacks, getmin(stacks->a));

@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 18:30:46 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 15:10:38 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/04 11:14:02 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	push_stack_top_a(t_stacks *stacks, t_stack *topush)
 
 	len = ft_stacklenght(stacks->a);
 	middle = indexof(stacks->a, topush);
-	if (middle < len / 2)
+	if (middle <= len / 2)
 		ptr = &rotate_a;
 	else
 		ptr = &reverse_rotate_a;
@@ -93,7 +93,7 @@ void	push_stack_top_b(t_stacks *stacks, t_stack *topush)
 	len = ft_stacklenght(stacks->b);
 	middle = indexof(stacks->b, topush);
 	// value = topush->content;
-	if (middle < len / 2)
+	if (middle <= len / 2)
 		ptr = &rotate_b;
 	else
 		ptr = &reverse_rotate_b;
