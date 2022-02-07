@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:07:01 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 17:04:22 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/07 18:22:51 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_stack	*ft_stacknew(int content)
 	return (new);
 }
 
+// USELESS
 void	ft_stackadd_front(t_stack **alst, t_stack *new)
 {
 	if (alst == NULL || new == NULL)

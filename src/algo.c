@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 18:28:20 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/07 18:08:55 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-
+// USELESS
 void	forward_index(t_stack *stack)
 {
 	t_stack *head;
@@ -68,22 +68,53 @@ void	set_index(t_stack *stack)
 	}
 }
 
-void	push_b_chunk(t_stacks *stacks, int chunk, int currentchunk)
+int	push_b_chunk(t_stacks *stacks, int chunk, int currentchunk)
 {
 	t_stack	*head;
+	int		i;
+	int		j;
+
+	t_stack	*topush;
+	t_stack	*topush2;
 
 	head = stacks->a;
-	while (head != NULL && which_chunk(head, chunk) != currentchunk)
+	topush = NULL;
+	i = 0;
+	while (head != NULL)
 	{
 		if (which_chunk(head, chunk) == currentchunk)
 		{
-			reverse_or_rotate_a(stacks, head);
-			push_b(stacks);
+			topush = head;
+			break;
 		}
+		i++;
 		head = head->next;
 	}
+	if (topush == NULL)
+		return (0);
+	j = 0;
+	head = ft_stacklast(stacks->a);
+	while (head != NULL)
+	{
+		if (which_chunk(head, chunk) == currentchunk)
+		{
+			topush2 = head;
+			break;
+		}
+		j++;
+		head = head->prev;
+	}
+	// printf("%d:%d {%d:%d}\n", );
+	if (i < j)
+	{
+		push_stack_top_a(stacks, topush);
+	}
+	else
+	{
+		push_stack_top_a(stacks, topush2);
+	}
+	return (1);
 }
-
 void	chunk_sort(t_stacks *stacks, int chunk)
 {
 	int	len;
@@ -91,10 +122,56 @@ void	chunk_sort(t_stacks *stacks, int chunk)
 	len = ft_stacklenght(stacks->a);
 	if (chunk != 5 | chunk != 11)
 		chunk = len / 20;
+	for (t_stack *head = stacks->a; head != NULL; head = head->next) {
+		// dprintf(1, "{%d} ", which_chunk(head, 5));
+	}
+	// dprintf(1, "\n");
+	int	currentchunk = 0;
+	t_stack *min;
+	t_stack *max;
+	while (currentchunk++ < chunk)
+	{
+		while (push_b_chunk(stacks, chunk, currentchunk))
+		{
+			min = getmin(stacks->b);
+			max = getmax(stacks->b);
+			// if (stacks->b != NULL && stacks->b->next != NULL)
+			// {
+				// if (min != NULL)
+				// 	push_stack_top_b(stacks, getmax(stacks->b));
+			// }
+			push_b(stacks);
+			// if (stacks->b->next != NULL && stacks->b->next->next != NULL && stacks->b->next->content > stacks->b->content && stacks->b->next->next->content > stacks->b->content)
+				// swap_b(stacks);
+		}
+	}
+	while (stacks->b != NULL)
+	{
+		push_stack_top_b(stacks, getmax(stacks->b));
+		push_a(stacks);
+	}
+	// while (push_b_chunk(stacks, 5, 2))
+	// 	push_b(stacks);
+	// while (push_b_chunk(stacks, 5, 3))
+	// 	push_b(stacks);
+	// while (push_b_chunk(stacks, 5, 4))
+	// 	push_b(stacks);
+	// while (push_b_chunk(stacks, 5, 5))
+	// 	push_b(stacks);
 	// for (int i = 0; i != 100; i++)
-	push_b_chunk(stacks, chunk, 5);
+	// push_b_chunk(stacks, chunk, 1);
+	// t_stack *i = stacks->a;
+	// printf("%d %d\n", stacks->a->index, i->index == 100);
+	// while (i->index != 100){
+	// 	// printf(":%d\n", i->index);
+	// 	if (i->index == 1)
+	// 		push_stack_top_a(stacks, i);
+	// 	i = i->next;
+	// }
+	// printf("%d", stacks->a->index);
+	
 	// for (t_stack *head = stacks->a; head != NULL; head = head->next) {
-		// printf("{%d} ", which_chunk(head, 5));
+	// 	printf("{%d} ", which_chunk(head, 5));
 	// }
 }
 
