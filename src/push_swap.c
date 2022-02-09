@@ -6,15 +6,9 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 12:10:40 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 12:11:13 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/** 
- * TODO:
- *  - Check MAX and MIN int 2147483647, -2147483648
- * 	- Remove gitignore
- */
 
 #include "push_swap.h"
 
