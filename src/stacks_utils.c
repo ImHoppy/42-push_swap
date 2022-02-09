@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_top.c                                         :+:      :+:    :+:   */
+/*   stacks_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 18:30:46 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 14:59:50 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 12:02:33 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ int	indexof(t_stack *stack, t_stack *tofind)
 			return (i);
 		head = head->next;
 		i++;
-	}
-	return (i);
-}
-
-int	reverse_indexof(t_stack *stack, t_stack *tofind)
-{
-	int		i;
-	t_stack	*head;
-
-	i = ft_stacklenght(stack);
-	head = ft_stacklast(stack);
-	while (head != NULL && head->prev != NULL && i)
-	{
-		if (head->content == tofind->content)
-			return (i);
-		head = head->prev;
-		i--;
 	}
 	return (i);
 }
@@ -65,25 +48,6 @@ t_stack	*getmin(t_stack *stack)
 	return (min);
 }
 
-t_stack	*getmax(t_stack *stack)
-{
-	int		i;
-	t_stack	*max;
-	t_stack	*head;
-
-	i = 0;
-	head = stack;
-	max = head;
-	while (head != NULL)
-	{
-		if (head->content > max->content)
-			max = head;
-		head = head->next;
-		i++;
-	}
-	return (max);
-}
-
 void	push_stack_top_a(t_stacks *stacks, t_stack *topush)
 {
 	int		len;
@@ -100,20 +64,16 @@ void	push_stack_top_a(t_stacks *stacks, t_stack *topush)
 		ptr(stacks);
 }
 
-void	push_stack_top_b(t_stacks *stacks, t_stack *topush)
+int	sorted(t_stack *lst)
 {
-	int		len;
-	int		middle;
-	// int		value;
-	void	(*ptr)(t_stacks*);
-
-	len = ft_stacklenght(stacks->b);
-	middle = indexof(stacks->b, topush);
-	// value = topush->content;
-	if (middle <= len / 2)
-		ptr = &rotate_b;
-	else
-		ptr = &reverse_rotate_b;
-	while (stacks->b != topush)
-		ptr(stacks);
+	if (lst == NULL || lst->next == NULL)
+		return (0);
+	while (lst->next != NULL)
+	{
+		if (lst->content < lst->next->content)
+			lst = lst->next;
+		else
+			return (0);
+	}
+	return (1);
 }

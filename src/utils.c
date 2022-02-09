@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:23:11 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/07 18:19:40 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 12:10:09 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,33 @@ void	error(t_stacks *stacks)
 		ft_lstclear(&stacks->result, NULL);
 	free(stacks);
 	exit(EXIT_FAILURE);
+}
+
+int	find_duplicate_stack(t_stack *stack)
+{
+	t_stack	*head;
+	t_stack	*current;
+
+	head = stack;
+	while (head != NULL)
+	{
+		current = stack;
+		while (current != NULL)
+		{
+			if (head->content == current->content && head != current)
+				return (1);
+			current = current->next;
+		}
+		head = head->next;
+	}
+	return (0);
+}
+
+void	ft_putendl(void *s)
+{
+	if (s)
+	{
+		ft_putstr_fd((char *)s, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
