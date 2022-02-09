@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/07 18:27:10 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 11:51:16 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,13 @@ void	which_algo(t_stacks *stacks)
 		number_5(stacks);
 	else if (len > 5 && len <= 100)
 		// insertion_sort(stacks, 5);
-		chunk_sort(stacks, 5);
+		// chunk_sort(stacks, 10);
+		index_sort(stacks, 17);
+
 	else if (len > 100 && len <= 500)
-		chunk_sort(stacks, 10);
+		index_sort(stacks, 44);
+
+		// chunk_sort(stacks, 10);
 }
 
 int	main(int argc, char **argv)
@@ -165,6 +169,17 @@ int	main(int argc, char **argv)
 	if (stacks->a != NULL)
 	{
 		which_algo(stacks);
+		// push_b(stacks);
+		// rotate_b(stacks);
+		// push_b(stacks);
+		// rotate_b(stacks);
+		// reverse_rotate_b(stacks);
+		// print_stack(stacks);
+		// dprintf(1, "1 %d\n", stacks->b->content);
+		// if (stacks->b->next)
+		// 	dprintf(1, "2 %d\n", stacks->b->next->content);
+		// if (stacks->b->prev)
+		// 	dprintf(1, "3 %d\n", stacks->b->prev->content);
 		ss_rr_rrr(stacks->result);
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);

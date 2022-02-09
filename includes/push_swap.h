@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/04 18:13:54 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 11:36:29 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	number_5(t_stacks *stacks);
 void	insertion_sort(t_stacks *stacks);
 void	quarter_sort(t_stacks *stacks);
 void	chunk_sort(t_stacks *stacks, int chunk);
+void	index_sort(t_stacks *stacks, int chunk);
 
 void	reverse_or_rotate_a(t_stacks *stacks, t_stack *topush);
 

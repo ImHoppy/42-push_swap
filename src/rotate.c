@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/09 11:49:52 by mbraets           #+#    #+#             */
+/*   Updated: 2022/02/09 11:50:04 by mbraets          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	reverse_or_rotate_a(t_stacks *stacks, t_stack *topush)
@@ -28,5 +40,5 @@ void	reverse_or_rotate_b(t_stacks *stacks, t_stack *topush)
 		ptr = &rotate_b;
 	else
 		ptr = &reverse_rotate_b;
- 	ptr(stacks);
+	ptr(stacks);
 }

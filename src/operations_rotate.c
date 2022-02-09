@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:00:36 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/07 18:23:10 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/08 14:09:30 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	reverse_rotate_b(t_stacks *stacks)
 		return ;
 	stack = &stacks->b;
 	last = ft_stacklast(*stack);
-	last->prev->next = NULL;
+	if (last->prev != NULL)
+		last->prev->next = NULL;
 	last = stack_pop(&last);
 	stack_push(stack, last);
 	ft_lstadd_back(&stacks->result, ft_lstnew("rrb"));
