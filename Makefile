@@ -4,7 +4,7 @@ CC		= clang
 CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
 LINKER	= clang
-LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -lm -g
+LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
 RM		= rm -rf
 
