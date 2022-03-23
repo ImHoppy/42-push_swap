@@ -1,14 +1,15 @@
 EXEC	= push_swap
 
 CC		= clang
-CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE)
+CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
 LINKER	= clang
-LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -lm
+LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
 RM		= rm -rf
 
 LIBFT	= libft
+LIBFT_M	= ${MAKE} -C ${LIBFT}/
 INCLUDE	= includes/
 SRC_DIR	= src
 OBJ_DIR	= obj
@@ -24,7 +25,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 $(EXEC): $(OBJ)
-	@make -C $(LIBFT) bonus
+	@${LIBFT_M} bonus
 	$(CC) $(OBJ) $(LFLAGS) -L$(LIBFT) -lft -o $@
 	@printf "$(COLOR)[32mCompiled "$@" successfully! $(COLOR)[0m\n"
 #	$(CC) -o $@ $^ $(LDFLAGS)
@@ -38,8 +39,11 @@ $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 all: $(EXEC)
 
 clean:
+	${LIBFT_M} clean
 	${RM} $(OBJ_DIR)
+	
 fclean: clean
+	${LIBFT_M} fclean
 	${RM} $(EXEC)
 re: fclean all
 

@@ -6,21 +6,11 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/01 17:31:14 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/09 12:11:13 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/** 
- * TODO:
- *  - Check MAX and MIN int 2147483647, -2147483648
- * 	- Remove gitignore
- *  - 6 instrucion max for 4 number
- *  - Rewrite instrucion for 5 number
- */
-
 #include "push_swap.h"
-#include <stdio.h>
-
 
 t_stack	*check_arg(int argc, char **argv)
 {
@@ -35,58 +25,18 @@ t_stack	*check_arg(int argc, char **argv)
 		if (ft_strisdigit(argv[i]))
 		{
 			new = ft_stacknew(ft_atoi(argv[i]));
+			if (new->content == -1 && (argv[i][1] != '1' | argv[i][1] != '0'))
+				return (ft_stackclear(&start), ft_stackclear(&new), NULL);
 			if (new != NULL)
 				ft_stackadd_back(&start, new);
 			else
-				return (ft_stackclear(&start), NULL);
+				return (ft_stackclear(&start), ft_stackclear(&new), NULL);
 		}
 		else
 			return (NULL);
 		i++;
 	}
 	return (start);
-}
-
-void	ft_putendl(void *s)
-{
-	if (s)
-	{
-		ft_putstr_fd((char *)s, 1);
-		ft_putchar_fd('\n', 1);
-	}
-}
-
-void	print_stack(t_stacks *stacks)
-{
-	printf("\n----------\n");
-	printf("StackA:%6s", "");
-	for (t_stack *head = stacks->a; head != NULL; head = head->next) {
-		printf("%d ", head->content);
-	}
-	printf("\nStackB:%6s", "");
-	for (t_stack *head = stacks->b; head != NULL; head = head->next) {
-		printf("%d ", head->content);
-	}
-}
-
-int	find_duplicate_stack(t_stack *stack)
-{
-	t_stack	*head;
-	t_stack	*current;
-
-	head = stack;
-	while (head != NULL)
-	{
-		current = stack;
-		while (current != NULL)
-		{
-			if (head->content == current->content && head != current)
-				return (1);
-			current = current->next;
-		}
-		head = head->next;
-	}
-	return (0);
 }
 
 t_list	*create_ss_rr_rrr(t_list *head, char *a, char *b, char *ab)
@@ -138,10 +88,9 @@ void	which_algo(t_stacks *stacks)
 	else if (len == 5)
 		number_5(stacks);
 	else if (len > 5 && len <= 100)
-		// insertion_sort(stacks, 5);
-		quarter_sort(stacks);
+		index_sort(stacks, 17);
 	else if (len > 100 && len <= 500)
-		insertion_sort(stacks, 11);
+		index_sort(stacks, 44);
 }
 
 int	main(int argc, char **argv)
@@ -156,13 +105,12 @@ int	main(int argc, char **argv)
 		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
 			error(NULL);
 	stacks = malloc(sizeof(t_stacks));
+	*stacks = (t_stacks){};
 	if (stacks == NULL)
-		return (ft_putstr_fd("Error\n", 2), 0);
+		error(stacks);
 	stacks->a = check_arg(argc - 1, argv + 1);
-	if (find_duplicate_stack(stacks->a))
-		return (ft_putstr_fd("Error\n", 2), 0);
-	stacks->b = NULL;
-	stacks->result = NULL;
+	if (stacks->a == NULL || find_duplicate_stack(stacks->a))
+		error(stacks);
 	if (stacks->a != NULL)
 	{
 		which_algo(stacks);
@@ -172,38 +120,4 @@ int	main(int argc, char **argv)
 		ft_lstclear(&stacks->result, &ft_putendl);
 	}
 	free(stacks);
-	return (0);
 }
-
-// #include <stdlib.h>
-// #include <stdio.h>
-
-// typedef struct nodeStruct
-// {
-//     int val;
-//     struct nodeStruct *next;
-// } node;
-
-// static void push(node **head, int v)
-// {
-//     node *temp = malloc(sizeof(node));
-//     temp->val = v;
-//     temp->next = *head;
-//     *head = temp;
-// }
-
-// int main(int argc, char **argv)
-// {
-//     (void) argv;
-//     (void) argc;
-//     node *list = NULL;
-
-//     for (int i=0; i<10; ++i) {
-//         push(&list, i);
-//     }
-//     for(node *l = list; l != NULL; l = l->next) {
-//         printf("%d ", l->val);
-//     }
-//     printf("\n");
-//     return 0;
-// }

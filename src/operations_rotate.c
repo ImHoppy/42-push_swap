@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:00:36 by mbraets           #+#    #+#             */
-/*   Updated: 2022/01/25 15:09:00 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/02/08 14:09:30 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ void	rotate_b(t_stacks *stacks)
  * 0 : last
  * 1 : beforelast
  */
+// add_front to stack_push
 void	reverse_rotate_a(t_stacks *stacks)
 {
 	t_stack	**stack;
-	t_stack	*temp[2];
+	t_stack	*last;
 
 	if (stacks->a == NULL || stacks->a->next == NULL)
 		return ;
 	stack = &stacks->a;
-	temp[0] = ft_stacklast(*stack);
-	temp[1] = ft_stackbeforelast(*stack);
-	temp[1]->next = NULL;
-	temp[0] = stack_pop(&temp[0]);
-	ft_stackadd_front(stack, temp[0]);
+	last = ft_stacklast(*stack);
+	last->prev->next = NULL;
+	last = stack_pop(&last);
+	stack_push(stack, last);
 	ft_lstadd_back(&stacks->result, ft_lstnew("rra"));
 }
 
@@ -62,18 +62,19 @@ void	reverse_rotate_a(t_stacks *stacks)
  * 0 : last
  * 1 : beforelast
  */
+// add_front to stack_push
 void	reverse_rotate_b(t_stacks *stacks)
 {
 	t_stack	**stack;
-	t_stack	*temp[3];
+	t_stack	*last;
 
 	if (stacks->b == NULL || stacks->b->next == NULL)
 		return ;
 	stack = &stacks->b;
-	temp[0] = ft_stacklast(*stack);
-	temp[1] = ft_stackbeforelast(*stack);
-	temp[1]->next = NULL;
-	temp[0] = stack_pop(&temp[0]);
-	ft_stackadd_front(stack, temp[0]);
+	last = ft_stacklast(*stack);
+	if (last->prev != NULL)
+		last->prev->next = NULL;
+	last = stack_pop(&last);
+	stack_push(stack, last);
 	ft_lstadd_back(&stacks->result, ft_lstnew("rrb"));
 }
