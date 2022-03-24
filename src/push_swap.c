@@ -25,7 +25,7 @@ t_stack	*check_arg(int argc, char **argv)
 		if (ft_strisdigit(argv[i]))
 		{
 			new = ft_stacknew(ft_atoi(argv[i]));
-			if (new->content == -1 && (argv[i][1] != '1' | argv[i][1] != '0'))
+			if (new->content == -1 && (argv[i][1] != '1' && argv[i][1] != '0'))
 				return (ft_stackclear(&start), ft_stackclear(&new), NULL);
 			if (new != NULL)
 				ft_stackadd_back(&start, new);
