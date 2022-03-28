@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:14:40 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 11:53:50 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:06:21 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	getnmax(t_stack *stack, int n)
 	return (pos);
 }
 
-void	rb_rrb(t_stacks *stacks, int pos)
+static void	rb_rrb_pos(t_stacks *stacks, int pos)
 {
 	int	stacksize;
 
@@ -88,7 +88,7 @@ void	pushback_b(t_stacks *stacks, int i, int range_max)
 		while (i > 0 && i >= range_max - 5)
 		{
 			pos = getnmax(stacks->b, i);
-			rb_rrb(stacks, pos);
+			rb_rrb_pos(stacks, pos);
 			push_a(stacks);
 			i--;
 		}

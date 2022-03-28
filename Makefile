@@ -13,7 +13,7 @@ LIBFT_M	= ${MAKE} -C ${LIBFT}/
 INCLUDE	= includes/
 SRC_DIR	= src
 OBJ_DIR	= obj
-SRC		= $(wildcard $(SRC_DIR)/*.c)
+SRC		= src/algo.c  src/algo_small.c  src/operations.c  src/operations_rotate.c  src/push_swap.c  src/radix.c  src/stack.c  src/stacks_utils.c  src/stacks_utils2.c  src/utils.c
 OBJ		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 UNAME_S := $(shell uname -s)

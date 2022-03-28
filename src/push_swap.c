@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 12:11:13 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:53:05 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	which_algo(t_stacks *stacks)
 	else if (len > 5 && len <= 100)
 		index_sort(stacks, 17);
 	else if (len > 100 && len <= 500)
-		index_sort(stacks, 44);
+		radix_sort(stacks);
 }
 
 int	main(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 12:09:42 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:58:16 by hoppy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_strisdigit(char *s);
 void	error(t_stacks *stacks);
 int		find_duplicate_stack(t_stack *stack);
 void	ft_putendl(void *s);
+void	set_index(t_stack *stack);
 
 // Instruction
 
@@ -68,5 +69,5 @@ void	number_3(t_stacks *stacks);
 void	number_4(t_stacks *stacks);
 void	number_5(t_stacks *stacks);
 void	index_sort(t_stacks *stacks, int chunk);
-
+void	radix_sort(t_stacks *stacks);
 #endif
