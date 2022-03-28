@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:08:37 by hoppy             #+#    #+#             */
-/*   Updated: 2022/03/28 17:35:05 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 21:05:54 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ char *decimal_to_binary(int n)
   char *p;
 
   t = 0;
-  p = (char*)malloc(32+1);
+  p = (char*)malloc(9+1);
 
   if (p == NULL)
     exit(EXIT_FAILURE);
 
-  for (c = 31 ; c >= 0 ; c--)
+  for (c = 8 ; c >= 0 ; c--)
   {
     d = n >> c;
 
@@ -63,29 +63,29 @@ void	print_stack(t_stacks *stacks)
 void	radix_sort(t_stacks *stacks)
 {
 	// int	mask;
-	int	i;
-	int	j;
+	// int	i;
+	// int	j;
 	// t_stack	*last;
 	int	stacksize;
-	int	maxbits;
+	int	max_bits;
+	int max_num;
 	// t_stack	*topush;
 
 	// last = ft_stacklast(stacks->a);
 	set_index(stacks->a);
 	// mask = 0;
-	i = 0;
-	maxbits = 0;
+	// i = 0;
+	max_bits = 0;
 	stacksize = ft_stacklenght(stacks->a);
+	max_num = stacksize - 1;
 	// printf("%d",stacksize);
 	// print_stack(stacks);
-	while (((stacksize - 1) >> maxbits) != 0)
-		++maxbits;
+	while ((max_num >> max_bits) != 0) ++max_bits;
 	// printf("%d", maxbits);
-	while (!sorted(stacks->a))
+	for (int i = 0 ; !sorted(stacks->a) ; ++i)
+	// for (int i = 0 ; i < max_bits ; ++i)
 	{
-		i++;
-		j = 0;
-		while (j++ < stacksize)
+		for(int j = 0 ; j < stacksize ; ++j)
 		{
 			// stacks->a;
 			if (((stacks->a->index >> i) & 1) == 1)
