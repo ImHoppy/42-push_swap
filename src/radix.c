@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:08:37 by hoppy             #+#    #+#             */
-/*   Updated: 2022/03/28 21:05:54 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 21:44:32 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ void	print_stack(t_stacks *stacks)
 
 void	radix_sort(t_stacks *stacks)
 {
-	// int	mask;
 	// int	i;
 	// int	j;
-	// t_stack	*last;
 	int	stacksize;
 	int	max_bits;
 	int max_num;
@@ -82,8 +80,8 @@ void	radix_sort(t_stacks *stacks)
 	// print_stack(stacks);
 	while ((max_num >> max_bits) != 0) ++max_bits;
 	// printf("%d", maxbits);
-	for (int i = 0 ; !sorted(stacks->a) ; ++i)
-	// for (int i = 0 ; i < max_bits ; ++i)
+	// for (int i = 0 ; !sorted(stacks->a) ; ++i)
+	for (int i = 0 ; i < max_bits ; ++i)
 	{
 		for(int j = 0 ; j < stacksize ; ++j)
 		{
@@ -94,9 +92,5 @@ void	radix_sort(t_stacks *stacks)
 				push_b(stacks);
 		}
 		empty_stack_b(stacks);
-		// mask++;
 	}
-	// print_stack(stacks);
-	empty_stack_b(stacks);
-	// print_stack(stacks);
 }

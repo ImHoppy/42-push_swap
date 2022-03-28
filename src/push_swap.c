@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/03/28 19:36:04 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/28 21:09:11 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int	main(int argc, char **argv)
 		ft_stackclear(&stacks->a);
 		ft_stackclear(&stacks->b);
 		ft_lstclear(&stacks->result, &ft_putendl);
-		// ft_lstclear(&stacks->result, &ft_putendl);
 	}
 	free(stacks);
 }
