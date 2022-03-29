@@ -6,11 +6,12 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/03/29 13:02:59 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/29 15:18:05 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 t_stack	*check_arg(int argc, char **argv)
 {
@@ -24,8 +25,8 @@ t_stack	*check_arg(int argc, char **argv)
 	{
 		if (ft_strisdigit(argv[i]))
 		{
-			new = ft_stacknew(ft_atoi(argv[i]));
-			if (new->content == -1 && (argv[i][1] != '1' && argv[i][1] != '0'))
+			new = ft_stacknew(ft_atoi_long(argv[i]));
+			if (new->content > 2147483647 || new->content < -2147483648)
 				return (ft_stackclear(&start), ft_stackclear(&new), NULL);
 			if (new != NULL)
 				ft_stackadd_back(&start, new);
@@ -96,14 +97,11 @@ void	which_algo(t_stacks *stacks)
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
-	int			i;
 
 	if (argc < 2)
 		return (0);
-	i = 0;
-	while (argv[++i])
-		if (!(ft_strisdigit(argv[i])) | (ft_strlen(argv[i]) > 11))
-			error(NULL);
+	if (check_integer(argv))
+		error(NULL);
 	stacks = malloc(sizeof(t_stacks));
 	*stacks = (t_stacks){};
 	if (stacks == NULL)

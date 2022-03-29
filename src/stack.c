@@ -6,13 +6,13 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 12:06:43 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 12:10:28 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:41:56 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_stacknew(int content)
+t_stack	*ft_stacknew(long long content)
 {
 	t_stack	*new;
 

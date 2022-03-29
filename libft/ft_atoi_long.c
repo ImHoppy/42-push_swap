@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoi_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 11:26:38 by mbraets           #+#    #+#             */
-/*   Updated: 2022/03/29 15:07:14 by mbraets          ###   ########.fr       */
+/*   Created: 2022/03/29 14:38:53 by mbraets           #+#    #+#             */
+/*   Updated: 2022/03/29 15:18:27 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+long long	ft_atoi_long(const char *nptr)
 {
-	size_t	n;
+	size_t		i;
+	size_t		sign;
+	long long	res;
 
-	n = 0;
-	while (s[n] != '\0')
-		n++;
-	return (n);
-}
-
-size_t	ft_slz(const char *s)
-{
-	size_t	n;
-
-	while (*s == '0')
-		s++;
-	n = 0;
-	while (s[n] != '\0')
-		n++;
-	return (n);
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (nptr[i] == '\n' || nptr[i] == ' ' || nptr[i] == '\f'
+		|| nptr[i] == '\r' || nptr[i] == '\t' || nptr[i] == '\v')
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while (ft_isdigit(nptr[i]))
+	{
+		res = res * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (res * sign);
 }

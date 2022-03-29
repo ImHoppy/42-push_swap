@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:23:11 by mbraets           #+#    #+#             */
-/*   Updated: 2022/02/09 12:10:09 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/29 15:19:02 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,23 @@ int	ft_strisdigit(char *s)
 	{
 		if (i == 0 && (s[i] == '-' || s[i] == '+'))
 			i++;
-		else if (!(ft_isdigit(s[i])))
+		if (!(ft_isdigit(s[i])))
 			return (0);
 		i++;
 	}
 	return (1);
+}
+
+int	check_integer(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[++i])
+		if ((!ft_strisdigit(argv[i])) || (ft_slz(argv[i]) > 15 \
+		|| ft_slz(argv[i]) < 1))
+			return (1);
+	return (0);
 }
 
 void	error(t_stacks *stacks)

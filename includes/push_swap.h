@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoppy <hoppy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:07:32 by mbraets           #+#    #+#             */
-/*   Updated: 2022/03/28 14:58:16 by hoppy            ###   ########.fr       */
+/*   Updated: 2022/03/29 15:19:13 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_stack
 {
-	int				content;
+	long long		content;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 	int				index;
@@ -31,7 +31,7 @@ typedef struct s_stacks
 	t_list			*result;
 }					t_stacks;
 
-t_stack	*ft_stacknew(int content);
+t_stack	*ft_stacknew(long long content);
 void	ft_stackadd_back(t_stack **alst, t_stack *new);
 void	ft_stackclear(t_stack **lst);
 int		ft_stacklenght(t_stack *lst);
@@ -51,6 +51,7 @@ void	error(t_stacks *stacks);
 int		find_duplicate_stack(t_stack *stack);
 void	ft_putendl(void *s);
 void	set_index(t_stack *stack);
+int		check_integer(char **argv);
 
 // Instruction
 
