@@ -1,9 +1,9 @@
 EXEC	= push_swap
 
-CC		= clang
+CC		= cc
 CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
-LINKER	= clang
+LINKER	= cc
 LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
 
 RM		= rm -rf
