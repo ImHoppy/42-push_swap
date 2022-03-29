@@ -6,7 +6,7 @@
 /*   By: mbraets <mbraets@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:54:04 by mbraets           #+#    #+#             */
-/*   Updated: 2022/03/28 21:09:11 by mbraets          ###   ########.fr       */
+/*   Updated: 2022/03/29 13:02:59 by mbraets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	which_algo(t_stacks *stacks)
 		number_5(stacks);
 	else if (len > 5 && len <= 100)
 		index_sort(stacks, 17);
-	else if (len > 100 && len <= 500)
+	else if (len > 100)
 		radix_sort(stacks);
 }
 
