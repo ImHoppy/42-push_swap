@@ -1,15 +1,16 @@
 EXEC	= push_swap
 
 CC		= cc
-CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
+CFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE)
 
 LINKER	= cc
-LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE) -g
+LFLAGS	= -Werror -Wall -Wextra -I$(INCLUDE)
 
 RM		= rm -rf
 
 LIBFT	= libft
 LIBFT_M	= ${MAKE} -C ${LIBFT}/
+
 INCLUDE	= includes/
 SRC_DIR	= src
 OBJ_DIR	= obj
@@ -34,7 +35,6 @@ $(OBJ): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p ${OBJ_DIR}
 	$(CC) $(CFLAGS) -I$(LIBFT) -c $< -o $@
 	@printf "$(COLOR)[34mCompiled "$<" successfully! $(COLOR)[0m\n"
-
 
 all: $(EXEC)
 
